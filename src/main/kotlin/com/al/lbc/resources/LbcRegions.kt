@@ -21,7 +21,7 @@ object LbcRegions {
     init {
         val regionsFileContent = javaClass.getResource(resourceFile).readText()
 
-        // Read the categories.json file
+        // Read the resource file
         regions = Json.parseList(regionsFileContent)
 
         // Process the categories to build a more intelligible map linking the channels to the categories and
@@ -34,16 +34,16 @@ object LbcRegions {
     }
 
     /**
-     * Synthetic accessor for the categories
+     * Synthetic accessor for the regions
      * @param channel the channel
-     * @return the category
+     * @return the region
      */
     operator fun get(channel: String): LbcRegion? {
         return regionsMap[channel]
     }
 
     operator fun get(region: Region): LbcRegion {
-        // We assume that if it's an enumerated category, then the value exists
+        // We assume that if it's an enumerated region, then the value exists
         return regionsMap.getValue(region.channel)
     }
 }

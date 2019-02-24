@@ -35,7 +35,7 @@ data class Filters(
     val enums: Map<String, List<String>>,
     val keywords: SearchKeywords,
     val location: SearchLocation,
-    val ranges: Ranges
+    val ranges: Map<String, SearchRange>
 ) {
     @kotlinx.serialization.ImplicitReflectionSerializer
     constructor(
@@ -43,35 +43,14 @@ data class Filters(
         enums: Map<String, List<String>>,
         keywords: SearchKeywords,
         region: Region,
-        ranges: Ranges
+        ranges: Map<String, SearchRange>
     ) : this(SearchCategory(category), enums, keywords, SearchLocation(region), ranges)
 }
 
 @Serializable
-data class Enums(
-    val ad_type: List<String>,
-    val brand: List<String>,
-    val fuel: List<String>,
-    val gearbox: List<String>,
-    val model: List<String>
-)
-
-@Serializable
-data class Ranges(
-    val mileage: SearchMileage,
-    val price: SearchPrice
-)
-
-@Serializable
-data class SearchPrice(
-    val max: Int,
-    val min: Int
-)
-
-@Serializable
-data class SearchMileage(
-    val max: Int,
-    val min: Int
+data class SearchRange(
+    val min: Int,
+    val max: Int
 )
 
 @Serializable

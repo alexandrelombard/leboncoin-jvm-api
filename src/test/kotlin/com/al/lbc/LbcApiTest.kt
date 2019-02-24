@@ -26,9 +26,11 @@ class LbcApiTest {
                         Pair("model", listOf("Serie 1"))),
                     SearchKeywords(),
                     Region.ILE_DE_FRANCE,
-                    Ranges(
-                        SearchMileage(60000, 20000),
-                        SearchPrice(47500, 250))),
+                    mapOf(
+                        Pair("mileage", SearchRange(20000, 60000)),
+                        Pair("price", SearchRange(250, 47500)))
+                    ),
+
                 35,
                 3,
                 35
