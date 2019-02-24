@@ -61,17 +61,22 @@ data class LbcAd(
 
 @Serializable
 data class LbcAdImages(
+    @Optional
     @SerialName("thumb_url")
-    val thumbUrl: String,
+    val thumbUrl: String = "",
+    @Optional
     @SerialName("small_url")
-    val smallUrl: String,
+    val smallUrl: String = "",
     @SerialName("nb_images")
     val nbImages: Int,
-    val urls: List<String>,
+    @Optional
+    val urls: List<String> = arrayListOf(),
+    @Optional
     @SerialName("urls_thumb")
-    val urlsThumb: List<String>,
+    val urlsThumb: List<String> = arrayListOf(),
+    @Optional
     @SerialName("urls_large")
-    val urlsLarge: List<String>
+    val urlsLarge: List<String> = arrayListOf()
 )
 
 @Serializable

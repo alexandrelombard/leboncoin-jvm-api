@@ -1,7 +1,9 @@
 package com.al.lbc
 
 import com.al.lbc.extended.Category
+import com.al.lbc.extended.Region
 import com.al.lbc.extended.builders.AdType
+import com.al.lbc.extended.builders.Gearbox
 import com.al.lbc.extended.builders.request
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.parse
@@ -19,9 +21,11 @@ class RequestBuilderTest {
             val res =
                 request {
                     adType = AdType.OFFER
+                    region = Region.FRANCHE_COMTE
                     voitures {
                         brand = "Bmw"
                         priceRange = SearchRange(10000, 40000)
+                        gearbox = Gearbox.AUTO
                     }
                 }.post()
 

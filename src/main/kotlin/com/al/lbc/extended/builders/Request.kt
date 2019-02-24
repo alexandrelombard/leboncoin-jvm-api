@@ -8,6 +8,10 @@ import com.al.lbc.extended.Category
 import com.al.lbc.extended.Region
 import kotlinx.serialization.ImplicitReflectionSerializer
 
+/**
+ * Type safe build for requests
+ * @author Alexandre Lombard
+ */
 class Request(
     var adType: AdType = AdType.OFFER,
     var region: Region = Region.ILE_DE_FRANCE,
@@ -28,9 +32,20 @@ class Request(
         voitureRequest.init()
 
         val brand = voitureRequest.brand
-        if(brand != null) {
+        if(brand != null)
             enums["brand"] = listOf(brand)
-        }
+
+        val model = voitureRequest.model
+        if(model != null)
+            enums["model"] = listOf(model)
+
+        val fuel = voitureRequest.fuel
+        if(fuel != null)
+            enums["fuel"] = listOf(fuel)
+
+        val gearbox = voitureRequest.gearbox
+        if(gearbox != null)
+            enums["gearbox"] = listOf(gearbox.id)
 
         val priceRange = voitureRequest.priceRange
         if(priceRange != null)
