@@ -5,6 +5,7 @@ import com.al.lbc.extended.Region
 import com.al.lbc.resources.LbcCategories
 import com.al.lbc.resources.LbcRegions
 import khttp.responses.Response
+import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
@@ -49,8 +50,10 @@ data class Filters(
 
 @Serializable
 data class SearchRange(
-    val min: Int,
-    val max: Int
+    @Optional
+    val min: Int? = null,
+    @Optional
+    val max: Int? = null
 )
 
 @Serializable
@@ -63,8 +66,7 @@ data class SearchLocation(
 }
 
 @Serializable
-class SearchKeywords(
-)
+data class SearchKeywords(val text: String = "")
 
 @Serializable
 data class SearchCategory(
