@@ -1,5 +1,7 @@
 package com.al.lbc
 
+import com.al.lbc.extended.Category
+import com.al.lbc.extended.Region
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.parse
 
@@ -15,18 +17,18 @@ class LbcApiTest {
             // Build the request
             val search = LbcSearch(
                 Filters(
-                    Category(LbcCategories["voitures"]?.id ?: 0),
-                    Enums(
-                        listOf("offer"),
-                        listOf("Bmw"),
-                        listOf("1"),
-                        listOf("1"),
-                        listOf("Serie 1")),
-                    Keywords(),
-                    Location("12"),
+                    Category.VOITURES,
+                    mapOf(
+                        Pair("ad_type", listOf("offer")),
+                        Pair("brand", listOf("Bmw")),
+                        Pair("fuel", listOf("1")),
+                        Pair("gearbox", listOf("1")),
+                        Pair("model", listOf("Serie 1"))),
+                    SearchKeywords(),
+                    Region.ILE_DE_FRANCE,
                     Ranges(
-                        Mileage(60000, 20000),
-                        Price(47500, 250))),
+                        SearchMileage(60000, 20000),
+                        SearchPrice(47500, 250))),
                 35,
                 3,
                 35

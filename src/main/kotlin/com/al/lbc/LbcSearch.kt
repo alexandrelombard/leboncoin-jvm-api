@@ -1,5 +1,9 @@
 package com.al.lbc
 
+import com.al.lbc.extended.Category
+import com.al.lbc.extended.Region
+import com.al.lbc.resources.LbcCategories
+import com.al.lbc.resources.LbcRegions
 import khttp.responses.Response
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -27,12 +31,21 @@ data class LbcSearch(
 
 @Serializable
 data class Filters(
-    val category: Category,
-    val enums: Enums,
-    val keywords: Keywords,
-    val location: Location,
+    val category: SearchCategory,
+    val enums: Map<String, List<String>>,
+    val keywords: SearchKeywords,
+    val location: SearchLocation,
     val ranges: Ranges
-)
+) {
+    @kotlinx.serialization.ImplicitReflectionSerializer
+    constructor(
+        category: Category,
+        enums: Map<String, List<String>>,
+        keywords: SearchKeywords,
+        region: Region,
+        ranges: Ranges
+    ) : this(SearchCategory(category), enums, keywords, SearchLocation(region), ranges)
+}
 
 @Serializable
 data class Enums(
@@ -45,34 +58,40 @@ data class Enums(
 
 @Serializable
 data class Ranges(
-    val mileage: Mileage,
-    val price: Price
+    val mileage: SearchMileage,
+    val price: SearchPrice
 )
 
 @Serializable
-data class Price(
+data class SearchPrice(
     val max: Int,
     val min: Int
 )
 
 @Serializable
-data class Mileage(
+data class SearchMileage(
     val max: Int,
     val min: Int
 )
 
 @Serializable
-data class Location(
+data class SearchLocation(
     val region: String
+) {
+    constructor(id: Int) : this(id.toString())
+    @kotlinx.serialization.ImplicitReflectionSerializer
+    constructor(region: Region) : this(LbcRegions[region].id)
+}
+
+@Serializable
+class SearchKeywords(
 )
 
 @Serializable
-class Keywords(
-)
-
-@Serializable
-data class Category(
+data class SearchCategory(
     val id: String
 ) {
     constructor(id: Int) : this(id.toString())
+    @kotlinx.serialization.ImplicitReflectionSerializer
+    constructor(category: Category): this(LbcCategories[category].id)
 }

@@ -1,0 +1,30 @@
+package com.al.lbc.extended
+
+enum class Region(val channel: String) {
+    ALSACE("alsace"),
+    AQUITAINE("aquitaine"),
+    AUVERGNE("auvergne"),
+    BASSE_NORMANDIE("basse_normandie"),
+    BOURGOGNE("bourgogne"),
+    BRETAGNE("bretagne"),
+    CENTRE("centre"),
+    CHAMPAGNE_ARDENNE("champagne_ardenne"),
+    CORSE("corse"),
+    FRANCHE_COMTE("franche_comte"),
+    HAUTE_NORMANDIE("haute_normandie"),
+    ILE_DE_FRANCE("ile_de_france"),
+    LANGUEDOC_ROUSSILLON("languedoc_roussillon"),
+    LIMOUSIN("limousin"),
+    LORRAINE("lorraine"),
+    MIDI_PYRENEES("midi_pyrenees"),
+    NORD_PAS_DE_CALAIS("nord_pas_de_calais"),
+    PAYS_DE_LA_LOIRE("pays_de_la_loire"),
+    PICARDIE("picardie"),
+    POITOU_CHARENTES("poitou_charentes"),
+    PROVENCE_ALPES_COTE_D_AZUR("provence_alpes_cote_d_azur"),
+    RHONE_ALPES("rhone_alpes"),
+    GUADELOUPE("guadeloupe"),
+    MARTINIQUE("martinique"),
+    GUYANE("guyane"),
+    REUNION("reunion")
+}
