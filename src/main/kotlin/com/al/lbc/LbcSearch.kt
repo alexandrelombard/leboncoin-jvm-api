@@ -1,60 +1,29 @@
 package com.al.lbc
 
+import khttp.responses.Response
 import kotlinx.serialization.Serializable
-
-//@Serializable
-//data class LbcSearch(
-//    @Optional
-//    var page: Int = 0,
-//    @Optional
-//    var query: String = "",
-//    @Optional
-//    var filter: LbcFilter = LbcFilter.PARTICULIER,
-//    @Optional
-//    var category: String = "",
-//    @Optional
-//    var region: String = "",
-//    @Optional
-//    var departement: String = "",
-//    @Optional
-//    var location: Array<LbcLocation> = arrayOf(),
-//    @Optional
-//    var extras: Array<LbcSearchExtra> = arrayOf()) {
-//    override fun equals(other: Any?): Boolean {
-//        if (this === other) return true
-//        if (javaClass != other?.javaClass) return false
-//
-//        other as LbcSearch
-//
-//        if (page != other.page) return false
-//        if (query != other.query) return false
-//        if (filter != other.filter) return false
-//        if (category != other.category) return false
-//        if (region != other.region) return false
-//        if (departement != other.departement) return false
-//        if (!location.contentEquals(other.location)) return false
-//        if (!extras.contentEquals(other.extras)) return false
-//
-//        return true
-//    }
-//
-//    override fun hashCode(): Int {
-//        var result = page
-//        result = 31 * result + query.hashCode()
-//        result = 31 * result + filter.hashCode()
-//        result = 31 * result + category.hashCode()
-//        result = 31 * result + region.hashCode()
-//        result = 31 * result + departement.hashCode()
-//        result = 31 * result + location.contentHashCode()
-//        result = 31
+import kotlinx.serialization.json.Json
 
 @Serializable
 data class LbcSearch(
     val filters: Filters,
     val limit: Int,
     val limit_alu: Int,
-    val offset: Int
-)
+    val offset: Int) {
+    fun post(): Response {
+        val jsonSearch = Json.stringify(LbcSearch.serializer(), this)
+
+        return khttp.post(
+            url = "http://api.leboncoin.fr/finder/search",
+            headers = mapOf(
+                Pair("origin",  "https://www.leboncoin.fr"),
+                Pair("api_key",  "ba0c2dad52b3ec"),
+                Pair("content-type",  "text/plain;charset=UTF-8"),
+                Pair("accept",  "*/*"),
+                Pair("referer",  "https://www.leboncoin.fr/annonces/offres/ile_de_france/")),
+            data = jsonSearch)
+    }
+}
 
 @Serializable
 data class Filters(
@@ -104,4 +73,6 @@ class Keywords(
 @Serializable
 data class Category(
     val id: String
-)
+) {
+    constructor(id: Int) : this(id.toString())
+}
