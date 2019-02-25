@@ -25,10 +25,10 @@ class LocationTest {
                     adType = AdType.OFFER
                     locations = listOf(SearchLocation(Department.TERRITOIRE_DE_BELFORT))
                     ventesImmobilieres {
-                        priceRange = SearchRange(25000, 125000)
-                        squareRange = SearchRange(20, 120)
-                        roomsRange = SearchRange(2, 6)
-                        realEstateTypes = listOf(RealEstateType.FLAT, RealEstateType.OTHER)
+                        priceRange = SearchRange(60000, 125000)
+                        squareRange = SearchRange(60, 120)
+                        roomsRange = SearchRange(3, 5)
+                        realEstateTypes = listOf(RealEstateType.FLAT)
                     }
                 }.post()
 
