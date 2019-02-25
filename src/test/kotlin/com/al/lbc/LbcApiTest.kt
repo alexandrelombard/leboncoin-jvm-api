@@ -25,7 +25,7 @@ class LbcApiTest {
                         Pair("gearbox", listOf("1")),
                         Pair("model", listOf("Serie 1"))),
                     SearchKeywords(),
-                    Region.ILE_DE_FRANCE,
+                    SearchLocations(SearchLocation(Region.ILE_DE_FRANCE)),
                     mapOf(
                         Pair("mileage", SearchRange(20000, 60000)),
                         Pair("price", SearchRange(250, 47500)))

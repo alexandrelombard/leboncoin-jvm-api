@@ -1,9 +1,6 @@
 package com.al.lbc.extended.builders
 
-import com.al.lbc.Filters
-import com.al.lbc.LbcSearch
-import com.al.lbc.SearchKeywords
-import com.al.lbc.SearchRange
+import com.al.lbc.*
 import com.al.lbc.extended.Category
 import com.al.lbc.extended.Region
 import kotlinx.serialization.ImplicitReflectionSerializer
@@ -14,7 +11,7 @@ import kotlinx.serialization.ImplicitReflectionSerializer
  */
 class Request(
     var adType: AdType = AdType.OFFER,
-    var region: Region = Region.ILE_DE_FRANCE,
+    var locations: List<SearchLocation> = listOf(),
     var keywords: String = "",
     var enums: MutableMap<String, List<String>> = hashMapOf(),
     var ranges: MutableMap<String, SearchRange> = hashMapOf(),
@@ -90,7 +87,7 @@ fun request(init: Request.() -> Unit): LbcSearch {
             request.category,
             request.enums,
             SearchKeywords(request.keywords),
-            request.region,
+            SearchLocations(request.locations),
             request.ranges),
         request.limit,
         request.limitAlu,

@@ -22,7 +22,7 @@ class RequestBuilderTest {
             val res =
                 request {
                     adType = AdType.OFFER
-                    region = Region.FRANCHE_COMTE
+                    locations = listOf(SearchLocation(Region.FRANCHE_COMTE))
                     voitures {
                         brand = "Bmw"
                         priceRange = SearchRange(10000, 40000)
@@ -41,7 +41,7 @@ class RequestBuilderTest {
             val res2 =
                     request {
                         adType = AdType.OFFER
-                        region = Region.FRANCHE_COMTE
+                        locations = listOf(SearchLocation(Region.FRANCHE_COMTE))
                         ventesImmobilieres {
                             priceRange = SearchRange(25000, 125000)
                             squareRange = SearchRange(20, 120)

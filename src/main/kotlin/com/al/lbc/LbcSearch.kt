@@ -38,7 +38,7 @@ data class Filters(
     val category: SearchCategory,
     val enums: Map<String, List<String>>,
     val keywords: SearchKeywords,
-    val location: SearchLocation,
+    val location: SearchLocations,
     val ranges: Map<String, SearchRange>
 ) {
     @kotlinx.serialization.ImplicitReflectionSerializer
@@ -46,9 +46,9 @@ data class Filters(
         category: Category,
         enums: Map<String, List<String>>,
         keywords: SearchKeywords,
-        region: Region,
+        location: SearchLocations,
         ranges: Map<String, SearchRange>
-    ) : this(SearchCategory(category), enums, keywords, SearchLocation(region), ranges)
+    ) : this(SearchCategory(category), enums, keywords, location, ranges)
 }
 
 @Serializable
@@ -60,55 +60,47 @@ data class SearchRange(
 )
 
 @Serializable
-data class SearchLocation(
-    val region: String
-) {
-    @kotlinx.serialization.ImplicitReflectionSerializer
-    constructor(region: Region) : this(LbcRegions[region].id)
-}
+data class SearchLocations(val locations: List<SearchLocation> = listOf()) {
+    constructor(vararg locations: SearchLocation) : this(locations.toMutableList())
 
-//@Serializable
-//data class SearchLocations(val locations: MutableList<SearchLocation> = arrayListOf()) {
-//    constructor(vararg locations: SearchLocation) : this(locations.toMutableList())
-//
 //    fun location(init: SearchLocation.() -> Unit) {
 //        val searchLocation = SearchLocation()
 //        searchLocation.init()
 //        this.locations.add(searchLocation)
 //    }
-//}
-//
-//@Serializable
-//data class SearchLocation(
-//    @Optional
-//    @SerialName("region_id")
-//    val region: String? = null,
-//    @Optional
-//    @SerialName("department_id")
-//    val department: String? = null,
-//    @Optional
-//    val zipcode: String? = null,
-//    @Optional
-//    val locationType: String? = null,
-//    @Optional
-//    val city: String? = null
-//) {
-//    @kotlinx.serialization.ImplicitReflectionSerializer
-//    constructor(region: Region) : this(LbcRegions[region].id, locationType = SearchLocationType.REGION.value)
-//    @kotlinx.serialization.ImplicitReflectionSerializer
-//    constructor(region: Region, near: Boolean) :
-//            this(region = LbcRegions[region].id,
-//                locationType = if(near) SearchLocationType.REGION_NEAR.value else SearchLocationType.REGION.value)
-//    @kotlinx.serialization.ImplicitReflectionSerializer
-//    constructor(department: Department) :
-//            this(region = LbcDepartments[department].id, locationType = SearchLocationType.DEPARTMENT.value,
-//                department = LbcDepartments[department].regionId)
-//    @kotlinx.serialization.ImplicitReflectionSerializer
-//    constructor(zipcode: String) : this(locationType = SearchLocationType.CITY.value, zipcode = zipcode)
-//    @kotlinx.serialization.ImplicitReflectionSerializer
-//    constructor(zipcode: String, city: String) :
-//            this(locationType = SearchLocationType.CITY.value, zipcode = zipcode, city = city)
-//}
+}
+
+@Serializable
+data class SearchLocation(
+    @Optional
+    @SerialName("region_id")
+    val region: String? = null,
+    @Optional
+    @SerialName("department_id")
+    val department: String? = null,
+    @Optional
+    val zipcode: String? = null,
+    @Optional
+    val locationType: String? = null,
+    @Optional
+    val city: String? = null
+) {
+    @kotlinx.serialization.ImplicitReflectionSerializer
+    constructor(region: Region) : this(LbcRegions[region].id, locationType = SearchLocationType.REGION.value)
+    @kotlinx.serialization.ImplicitReflectionSerializer
+    constructor(region: Region, near: Boolean) :
+            this(region = LbcRegions[region].id,
+                locationType = if(near) SearchLocationType.REGION_NEAR.value else SearchLocationType.REGION.value)
+    @kotlinx.serialization.ImplicitReflectionSerializer
+    constructor(department: Department) :
+            this(region = LbcDepartments[department].id, locationType = SearchLocationType.DEPARTMENT.value,
+                department = LbcDepartments[department].regionId)
+    @kotlinx.serialization.ImplicitReflectionSerializer
+    constructor(zipcode: String) : this(locationType = SearchLocationType.CITY.value, zipcode = zipcode)
+    @kotlinx.serialization.ImplicitReflectionSerializer
+    constructor(zipcode: String, city: String) :
+            this(locationType = SearchLocationType.CITY.value, zipcode = zipcode, city = city)
+}
 
 enum class SearchLocationType(val value: String) {
     REGION_NEAR("region_near"),
