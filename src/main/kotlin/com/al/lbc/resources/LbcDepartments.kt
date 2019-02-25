@@ -2,6 +2,7 @@ package com.al.lbc.resources
 
 import com.al.lbc.LbcDepartment
 import com.al.lbc.LbcRegion
+import com.al.lbc.extended.Department
 import com.al.lbc.extended.Region
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.parseList
@@ -43,8 +44,8 @@ object LbcDepartments {
         return departmentsMap[channel]
     }
 
-    operator fun get(region: Region): LbcDepartment {
+    operator fun get(department: Department): LbcDepartment {
         // We assume that if it's an enumerated department, then the value exists
-        return departmentsMap.getValue(region.channel)
+        return departmentsMap.getValue(department.channel)
     }
 }
