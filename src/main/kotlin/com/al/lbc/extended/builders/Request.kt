@@ -55,6 +55,29 @@ class Request(
         if(yearRange != null)
             ranges["regdate"] = yearRange
     }
+
+    fun ventesImmobilieres(init: VentesImmobilieresRequest.() -> Unit) {
+        this.category = Category.VENTES_IMMOBILIERES
+
+        val ventesImmobilieresRequest = VentesImmobilieresRequest()
+        ventesImmobilieresRequest.init()
+
+        val realEstateTypes = ventesImmobilieresRequest.realEstateTypes
+        if(realEstateTypes != null)
+            enums["real_estate_type"] = realEstateTypes.map { it.value.toString() }
+
+        val priceRange = ventesImmobilieresRequest.priceRange
+        if(priceRange != null)
+            ranges["price"] = priceRange
+
+        val squareRange = ventesImmobilieresRequest.squareRange
+        if(squareRange != null)
+            ranges["square"] = squareRange
+
+        val roomsRange = ventesImmobilieresRequest.roomsRange
+        if(roomsRange != null)
+            ranges["rooms"] = roomsRange
+    }
 }
 
 @ImplicitReflectionSerializer

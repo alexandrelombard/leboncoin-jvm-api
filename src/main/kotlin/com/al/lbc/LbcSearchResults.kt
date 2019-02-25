@@ -83,8 +83,9 @@ data class LbcAdImages(
 data class LbcAdAttribute(
     val key: String,
     val value: String,
+    @Optional
     @SerialName("key_label")
-    val keyLabel: String,
+    val keyLabel: String = "",
     @SerialName("value_label")
     val valueLabel: String,
     val generic: Boolean
@@ -124,7 +125,10 @@ data class LbcAdOwner(
     @Optional
     val siren: String? = null,
     @SerialName("no_salesmen")
-    val noSalesmen: Boolean
+    val noSalesmen: Boolean,
+    @Optional
+    @SerialName("pro_rates_link")
+    val proRatesLink: String = ""
 )
 
 @Serializable
