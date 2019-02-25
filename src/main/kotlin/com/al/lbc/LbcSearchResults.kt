@@ -101,8 +101,9 @@ data class LbcAdLocation(
     val regionName: String,
     @SerialName("department_id")
     val departmentId: String,
+    @Optional
     @SerialName("department_name")
-    val departmentName: String,
+    val departmentName: String = "",
     @SerialName("city_label")
     val cityLabel: String,
     val city: String,
