@@ -19,9 +19,11 @@ data class LbcSearchResults(
     @SerialName("total_inactive")
     val totalInactive: Int,
     val pivot: String,
-    val ads: List<LbcAd>,
+    @Optional
+    val ads: List<LbcAd> = listOf(),
+    @Optional
     @SerialName("ads_alu")
-    val adsAlu: List<LbcAd>
+    val adsAlu: List<LbcAd> = listOf()
 )
 
 @Serializable
